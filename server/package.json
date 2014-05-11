@@ -1,0 +1,27 @@
+{
+  "author": "Gaurav Arora (samuelharden) <gauravarora.daiict@gmail.com> ",
+  "name": "LocalYoutube",
+  "description": "A backend server to chromeextension to save bandwidth by streaming music via loacal source.",
+  "keywords": ["LocalYoutube", "youtube", "server", "savebandwidth"],
+  "version": "1.0.0",
+  "homepage": "https://github.com/samuelharden/LocalYoutube",
+  "repository": {
+    "type": "https",
+    "url": "https://github.com/samuelharden/LocalYoutube.git"
+  },
+  "main": "localyoutube.js",
+  "engines": {
+    "node": ">= v0.8.0"
+  },
+  "dependencies": {
+    "ytdl" : ">= 0.2.8"
+  },
+  "licenses": [ {
+    "type": "MIT",
+    "url": "https://github.com/samuelharden/LocalYoutube/blob/master/LICENSE"
+  } ],
+  "bugs": {
+    "mail" : "gauravarora.daiict@gmail.com",
+    "url" : "https://github.com/samuelharden/LocalYoutube/issues"
+  }
+}
