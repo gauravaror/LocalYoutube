@@ -17,6 +17,12 @@ var options = {
 
 http.createServer(function (req, res) {
 var path = "."+req.url;
+if (path == "./undefined.mp4") {
+    console.log("Returning 500 undefined format for now, while telling if video exist")
+    res.writeHead(500);
+    res.end();
+    return;
+}
 var id = req.url.split(".")[0].split("/")[1];
 var ytdlurl = "https://www.youtube.com/watch?v="+id
     console.log(path);
@@ -29,7 +35,7 @@ var ytdlurl = "https://www.youtube.com/watch?v="+id
         res.end();
       } 
       else {
-  //      console.log(req);
+        console.log(req);
         downloadFile(req,path,ytdlurl);
         res.writeHead(500);
         res.end();
@@ -37,7 +43,7 @@ var ytdlurl = "https://www.youtube.com/watch?v="+id
     
     }
     catch(err) {
-    //    console.log(req);
+       console.log(req);
         downloadFile(req,path,ytdlurl);
         res.writeHead(500);
         res.end();
@@ -47,7 +53,13 @@ console.log('Server running at http://127.0.0.1:8001/');
 
 var cleartextStream = https.createServer(options,function (req, res) {
 //  var path = 'video.mp4';
-  var path = "."+req.url;
+var path = "."+req.url;
+if (path == "./undefined.mp4") {
+    console.log("Returning 500 undefined format for now, while serving the video")
+    res.writeHead(500);
+    res.end();
+    return;
+}
   console.log(path);
   var stat;
   try {
