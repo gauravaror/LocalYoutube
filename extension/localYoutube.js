@@ -19,6 +19,25 @@ alert(document.title);
 
 document.addEventListener('DOMContentLoaded', function () {
 //    alert("sdfsd"+getQueryVariable("v"));
+    vid.addEventListener('loadstart',loadstarthandaler);
+    vid.addEventListener('canplay',activateloadstart);
+    vid.addEventListener('error',errorhandaler);
+  //  vid.addEventListener('abort',errorhandaler);
+});
+
+document.addEventListener('load',activateloadstart,true);
+document.addEventListener('error',activateloadstart,true);
+
+
+function activateloadstart() {
+    var vid = document.getElementsByTagName('video')[0];
+    if (vid && vid.addEventListener) {
+        vid.addEventListener('loadstart',loadstarthandaler);
+    }
+}
+
+
+function loadstarthandaler () {
     var vid = document.getElementsByTagName('video')[0];
     var videoid = getQueryVariable("v");
     var xhr = new XMLHttpRequest();
@@ -26,30 +45,27 @@ document.addEventListener('DOMContentLoaded', function () {
           if (xhr.readyState == 4) {
                 if (xhr.status==200) {
                     videoavailable= true;
+                    var vid = document.getElementsByTagName('video')[0];
+                    var videoid = getQueryVariable("v");
+                    //    alert(xhr.status);
+                    //    alert(videoavailable);
+                    if (videoavailable) {
+                        stream = vid.src;
+                        vid.src = "https://127.0.0.1:8000/"+videoid+".mp4";
+                        vid.autoplay = true
+                        vid.removeEventListener('loadstart',loadstarthandaler);
+                    }
                 }
          }
     }
     xhr.open("GET", "http://127.0.0.1:8001/"+videoid+".mp4", true);
     xhr.send(null);
-    vid.addEventListener('loadstart',loadstarthandaler);
-    vid.addEventListener('error',errorhandaler);
-  //  vid.addEventListener('abort',errorhandaler);
-});
-
-function loadstarthandaler () {
-    var vid = document.getElementsByTagName('video')[0];
-    var videoid = getQueryVariable("v");
-//    alert(xhr.status);
-//    alert(videoavailable);
-    if (videoavailable) {
-        stream = vid.src;
-        vid.src = "https://127.0.0.1:8000/"+videoid+".mp4";
-        vid.autoplay = true
-        vid.removeEventListener('loadstart',loadstarthandaler);
-    }
 
 }
 
+function windowhashchangeHandaler() {
+    alert("hashchangeEvent Fired");
+}
 
 function errorhandaler() {
     var vid = document.getElementsByTagName('video')[0];
