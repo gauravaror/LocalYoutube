@@ -1,0 +1,26 @@
+{
+  "manifest_version": 2,
+
+  "name": "Local Youtube",
+  "description": "This extension check if the video is available on local server, then stream from local server to save bandwidth.",
+  "version": "1.0",
+
+  "permissions": [
+    "tabs","activeTab","https://www.youtube.com/","http://127.0.0.1:8001/*"
+  ],
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "localyoutube.html"
+  },
+  "background": {
+    "scripts" : ["background.js"]
+    },
+  "content_scripts" : [
+        {
+        "matches" : ["https://www.youtube.com/*"],
+        "js" : ["localYoutube.js"],
+        "run_at" :"document_start"
+        }
+    ]
+
+}
