@@ -9,12 +9,9 @@
     "tabs","activeTab","https://www.youtube.com/","http://127.0.0.1:8001/*"
   ],
   "browser_action": {
-    "default_icon": "icon.png",
+    "default_icon": "localyoutube.jpg",
     "default_popup": "localyoutube.html"
   },
-  "background": {
-    "scripts" : ["background.js"]
-    },
   "content_scripts" : [
         {
         "matches" : ["https://www.youtube.com/*"],
