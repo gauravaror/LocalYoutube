@@ -4,7 +4,6 @@ var videoavailable = false;
 
 var handelerclick = function() {
 document.title = "This is Youtube clicked";
-alert(document.title);
 }
 
 var handelerplay = function() {
@@ -19,6 +18,7 @@ alert(document.title);
 
 document.addEventListener('DOMContentLoaded', function () {
 //    alert("sdfsd"+getQueryVariable("v"));
+    var vid = document.getElementsByTagName('video')[0];
     vid.addEventListener('loadstart',loadstarthandaler);
     vid.addEventListener('canplay',activateloadstart);
     vid.addEventListener('error',errorhandaler);
@@ -55,6 +55,11 @@ function loadstarthandaler () {
                         vid.autoplay = true
                         vid.removeEventListener('loadstart',loadstarthandaler);
                     }
+                } 
+                 if (xhr.status == 0) {
+                    chrome.runtime.sendMessage({notify: "serverdown"}, function(response) {
+                        console.log(response);
+                    });
                 }
          }
     }
@@ -84,3 +89,4 @@ function getQueryVariable(variable) {
     }
     console.log('Query variable %s not found', variable);
 }
+

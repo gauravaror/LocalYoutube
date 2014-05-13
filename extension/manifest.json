@@ -6,23 +6,30 @@
   "version": "1.0",
 
   "permissions": [
-    "tabs","activeTab","https://www.youtube.com/","http://127.0.0.1:8001/*"
+    "tabs","activeTab","https://www.youtube.com/","http://127.0.0.1:8001/*","notifications"
   ],
   "browser_action": {
     "default_icon": "icons/localyoutube48.png",
     "default_popup": "localyoutube.html"
   },
-"icons": {
+    "icons": {
     "16": "icons/localyoutube16.png",
     "48": "icons/localyoutube48.png",
     "128": "icons/localyoutube128.png"
   },
-  "content_scripts" : [
+    "background": {
+    "scripts": ["background.js"]
+   },
+    "content_scripts" : [
         {
         "matches" : ["https://www.youtube.com/*"],
         "js" : ["localYoutube.js"],
         "run_at" :"document_start"
         }
-    ]
+    ],
+  "web_accessible_resources": [
+    "icons/localyoutube48.png"
+  ]
+
 
 }
