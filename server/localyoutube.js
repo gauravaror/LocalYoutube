@@ -140,3 +140,7 @@ nowsend = function (req,res,path,total,end1){
         res.end();
     }
 }
+
+process.on('uncaughtException', function (err) {
+  console.log('Caught exception: ' + err);
+});
