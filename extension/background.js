@@ -1,4 +1,6 @@
 
+var lastNotificationDelay = 7200000;
+var shouldNotify = true;
 
 var messageRouter =  function(request, sender, sendResponse) {
 /*    console.log(sender.tab ?
@@ -11,7 +13,11 @@ var messageRouter =  function(request, sender, sendResponse) {
         'Your local streaming server is down', // The title.
         'Start using node localyoutube.js.'      // The body.
         );
-          notification.show();
+        if ( shouldNotify ) {
+            notification.show();
+            shouldNotify = false;
+            setTimeout(function() { shouldNotify = true; },lastNotificationDelay)
+        }
     }
         sendResponse({status: "ok"});
     }
