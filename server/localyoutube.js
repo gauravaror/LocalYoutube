@@ -86,10 +86,10 @@ console.log('Server running at https://127.0.0.1:8000/');
 downloadFile = function(req,path,ytdlurl) {
     try {
         if (ytdlurl) {
-            ytdl(ytdlurl,{ filter: function(format) { return format.container === 'mp4'; } }).pipe(fs.createWriteStream(path));
+            ytdl(ytdlurl,{ filter: function(format) { return format.container === 'mp4'; }}).pipe(fs.createWriteStream(path));
         }
         else {
-            ytdl(req.headers['referer'],{ filter: function(format) { return format.container === 'mp4'; } }).pipe(fs.createWriteStream(path));
+            ytdl(req.headers['referer'],{ filter: function(format) { return format.container === 'mp4'; }}).pipe(fs.createWriteStream(path));
         }
     }
     catch(err ) {

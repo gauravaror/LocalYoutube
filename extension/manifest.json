@@ -6,7 +6,7 @@
   "version": "1.0",
 
   "permissions": [
-    "tabs","activeTab","https://www.youtube.com/","http://127.0.0.1:8001/*","notifications"
+    "tabs","activeTab","https://www.youtube.com/","http://127.0.0.1:8001/*","notifications","storage"
   ],
   "browser_action": {
     "default_icon": "icons/localyoutube48.png",
@@ -18,8 +18,9 @@
     "128": "icons/localyoutube128.png"
   },
     "background": {
-    "scripts": ["background.js"]
+        "scripts": ["background.js"]
    },
+    "options_page": "localyoutubeoptions.html",
     "content_scripts" : [
         {
         "matches" : ["https://www.youtube.com/*"],
