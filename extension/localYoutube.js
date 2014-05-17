@@ -47,17 +47,25 @@ function loadstarthandaler () {
                     videoavailable= true;
                     var vid = document.getElementsByTagName('video')[0];
                     var videoid = getQueryVariable("v");
+                    var isList = getQueryVariable("list")=="undefined";
                     //    alert(xhr.status);
                     //    alert(videoavailable);
-                    if (videoavailable) {
-                        stream = vid.src;
-                        vid.src = "https://127.0.0.1:8000/"+videoid+".mp4";
-                        vid.autoplay = true
-                        vid.removeEventListener('loadstart',loadstarthandaler);
-                    }
+                    alert(isList+"islist")
+                    chrome.runtime.sendMessage({onlyList: "get"},function(response) {
+                        alert("ddsf"+response); 
+                        var list = response.list;
+                        alert(list+"list");
+                        alert(!(list && !(isList)) && videoavailable+"final"+ videoavailable+" lsit "+!(list && !(isList)));
+                        if ( !(list && !(isList)) && videoavailable) {
+                            stream = vid.src;
+                            vid.src = "https://127.0.0.1:8000/"+videoid+".mp4";
+                            vid.autoplay = true
+                            vid.removeEventListener('loadstart',loadstarthandaler);
+                        }
+                    });
                 } 
                  if (xhr.status == 0) {
-                    chrome.runtime.sendMessage({notify: "serverdown"}, function(response) {
+                    chrome.runtime.sendMessage({notify: "serverdown"},function(response) {
                         console.log(response);
                     });
                 }
