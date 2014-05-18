@@ -40,29 +40,25 @@ function activateloadstart() {
 function loadstarthandaler () {
     var vid = document.getElementsByTagName('video')[0];
     var videoid = getQueryVariable("v");
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-          if (xhr.readyState == 4) {
+    chrome.runtime.sendMessage({onlyList: "get"},function(response) {
+        var isList = !(getQueryVariable("list")=="undefined");
+        var list = response.list;
+        if(!(list && !(isList))){
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
                 if (xhr.status==200) {
                     videoavailable= true;
                     var vid = document.getElementsByTagName('video')[0];
                     var videoid = getQueryVariable("v");
-                    var isList = getQueryVariable("list")=="undefined";
                     //    alert(xhr.status);
                     //    alert(videoavailable);
-                    alert(isList+"islist")
-                    chrome.runtime.sendMessage({onlyList: "get"},function(response) {
-                        alert("ddsf"+response); 
-                        var list = response.list;
-                        alert(list+"list");
-                        alert(!(list && !(isList)) && videoavailable+"final"+ videoavailable+" lsit "+!(list && !(isList)));
-                        if ( !(list && !(isList)) && videoavailable) {
+                        if (  videoavailable ) {
                             stream = vid.src;
                             vid.src = "https://127.0.0.1:8000/"+videoid+".mp4";
                             vid.autoplay = true
                             vid.removeEventListener('loadstart',loadstarthandaler);
                         }
-                    });
                 } 
                  if (xhr.status == 0) {
                     chrome.runtime.sendMessage({notify: "serverdown"},function(response) {
@@ -70,9 +66,11 @@ function loadstarthandaler () {
                     });
                 }
          }
-    }
-    xhr.open("GET", "http://127.0.0.1:8001/"+videoid+".mp4", true);
-    xhr.send(null);
+        }
+        xhr.open("GET", "http://127.0.0.1:8001/"+videoid+".mp4", true);
+        xhr.send(null);
+        }
+    });
 
 }
 
@@ -96,5 +94,6 @@ function getQueryVariable(variable) {
         }
     }
     console.log('Query variable %s not found', variable);
+    return "undefined"
 }
 

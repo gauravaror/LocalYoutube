@@ -6,8 +6,6 @@ var messageRouter =  function(request, sender, sendResponse) {
 /*    alert(sender.tab ?
                 "from a content script:" + sender.tab.url :
                 "from the extension");*/
-    alert(request);
-    alert(sendResponse);
     if (request) {
     
         if (request.notify == "serverdown") {
@@ -29,7 +27,6 @@ var messageRouter =  function(request, sender, sendResponse) {
             chrome.storage.sync.get({
              list: true,
              },function(item) {
-                alert(item.list);
                 sendResponse({ list: item.list});
              });
         }
