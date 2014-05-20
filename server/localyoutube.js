@@ -31,7 +31,7 @@ var ytdlurl = "https://www.youtube.com/watch?v="+id
       stat = fs.statSync(path);
       var total = stat.size;
       if (total != 0) {
-        res.writeHead(200);      
+        res.writeHead(200,{'len':total});     
         res.end();
       } 
       else {

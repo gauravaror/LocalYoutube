@@ -30,6 +30,21 @@ var messageRouter =  function(request, sender, sendResponse) {
                 sendResponse({ list: item.list});
              });
         }
+        if (request.LenVideo != undefined) {
+//            alert("LenVideo: "+request.LenVideo);
+            chrome.storage.sync.get({
+             'LenVideo': 0,
+             },function(item) {
+                var length = parseInt(request.LenVideo);
+                length = length + item.LenVideo;
+  //              alert("LenVideo1: "+length);
+                chrome.storage.sync.set({
+                 'LenVideo': length,
+                 },function() {
+                    console.log("Legth Updated:");
+                 });
+             });
+        }
     }
     return true;
 };
