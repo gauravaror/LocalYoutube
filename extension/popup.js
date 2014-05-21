@@ -14,6 +14,11 @@ function init() {
              },function(item) {
                 document.getElementById('lengthsave').textContent = item.LenVideo;
             });
+    chrome.storage.sync.get({
+             CountVideo: 0,
+             },function(item) {
+                document.getElementById('countsave').textContent = item.CountVideo;
+            });
 
 }    
 document.addEventListener('DOMContentLoaded', init);

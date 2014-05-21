@@ -45,6 +45,20 @@ var messageRouter =  function(request, sender, sendResponse) {
                  });
              });
         }
+        if (request.CountVideo == "inc" ) {
+            chrome.storage.sync.get({
+             'CountVideo': 0,
+             },function(item) {
+                var length = parseInt(1);
+                length = length + parseInt(item.CountVideo);
+  //              alert("LenVideo1: "+length);
+                chrome.storage.sync.set({
+                 'CountVideo': length,
+                 },function() {
+                    console.log("Legth Number of songs Updated:");
+                 });
+             });
+        }
     }
     return true;
 };

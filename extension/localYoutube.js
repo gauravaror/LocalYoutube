@@ -55,6 +55,7 @@ function loadstarthandaler () {
                     //    alert(videoavailable);
                         if (  videoavailable ) {
                             chrome.runtime.sendMessage({'LenVideo' : xhr.getResponseHeader('len')},function(response){console.log("length added")});;
+                            chrome.runtime.sendMessage({'CountVideo' : "inc"},function(response){console.log("increase song played")});;
                             stream = vid.src;
                             vid.src = "https://127.0.0.1:8000/"+videoid+".mp4";
                             vid.autoplay = true
