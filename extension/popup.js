@@ -12,12 +12,14 @@ function init() {
     chrome.storage.sync.get({
              LenVideo: 0,
              },function(item) {
-                document.getElementById('lengthsave').textContent = item.LenVideo;
+                var text = "Total Data Served(in bytes): "+ item.LenVideo;
+                document.getElementById('lengthsave').textContent = text;
             });
     chrome.storage.sync.get({
              CountVideo: 0,
              },function(item) {
-                document.getElementById('countsave').textContent = item.CountVideo;
+                var text = "Total Number of video's Served: "+ item.CountVideo;
+                document.getElementById('countsave').textContent = text;
             });
 
 }    
