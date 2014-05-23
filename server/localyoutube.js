@@ -8,8 +8,13 @@ var https = require('https'),
     util = require('util'),
     tls = require('tls'),
     ytdl = require('ytdl');
+var argv = require('minimist')(process.argv.slice(2))
 
-
+var directory = ".";
+if ( argv['dir'] != undefined) {
+    directory = argv['dir'];
+}
+console.log(directory);
 var options = {
   key: fs.readFileSync('key.pem'),
   cert: fs.readFileSync('key-cert.pem')
@@ -28,7 +33,7 @@ var ytdlurl = "https://www.youtube.com/watch?v="+id
     console.log(path);
     console.log(ytdlurl);
   try {
-      stat = fs.statSync(path);
+      stat = fs.statSync(directory+"/"+path);
       var total = stat.size;
       if (total != 0) {
         res.writeHead(200,{'len':total});     
@@ -63,14 +68,14 @@ if (path == "./undefined.mp4") {
   console.log(path);
   var stat;
   try {
-      stat = fs.statSync(path);
+      stat = fs.statSync(directory+"/"+path);
   var total = stat.size;
   if (req.headers['range']) {
     nowsend(req,res,path,total);
   } else {
     console.log('ALL: ' + total);
     res.writeHead(200, { 'Content-Length': total, 'Content-Type': 'video/mp4' });
-    fs.createReadStream(path).pipe(res);
+    fs.createReadStream(directory+"/"+path).pipe(res);
   }
     }
     catch(err) {
@@ -86,10 +91,10 @@ console.log('Server running at https://127.0.0.1:8000/');
 downloadFile = function(req,path,ytdlurl) {
     try {
         if (ytdlurl) {
-            ytdl(ytdlurl,{ filter: function(format) { return format.container === 'mp4'; }}).pipe(fs.createWriteStream(path));
+            ytdl(ytdlurl,{ filter: function(format) { return format.container === 'mp4'; }}).pipe(fs.createWriteStream(directory+"/"+path));
         }
         else {
-            ytdl(req.headers['referer'],{ filter: function(format) { return format.container === 'mp4'; }}).pipe(fs.createWriteStream(path));
+            ytdl(req.headers['referer'],{ filter: function(format) { return format.container === 'mp4'; }}).pipe(fs.createWriteStream(directory+"/"+path));
         }
     }
     catch(err ) {
@@ -98,7 +103,7 @@ downloadFile = function(req,path,ytdlurl) {
 }   
 
 letsexecute = function(req,res,path,total,end) {
-    stat = fs.statSync(path);
+    stat = fs.statSync(directory+"/"+path);
     var end = stat.size;
     console.log("now getting the end: "+end);
     if (req.headers['range']) {
@@ -128,14 +133,14 @@ nowsend = function (req,res,path,total,end1){
             throw new Error("No content to let it go to youtube");
         }
         res.writeHead(206, { 'Content-Range': 'bytes ' + start + '-' + end + '/' + total, 'Accept-Ranges': 'bytes', 'Content-Length': chunksize, 'Content-Type': 'video/mp4' });
-        var file = fs.createReadStream(path, {start: start, end: end});
+        var file = fs.createReadStream(directory+"/"+path, {start: start, end: end});
         file.pipe(res);
 //        fs.createReadStream(path).pipe(res);
     }
     catch (err) {
         console.log("problem sending downloading file"+ err)
         res.writeHead(206, { 'Content-Range': 'bytes ' + start + '-' + end + '/' + total, 'Accept-Ranges': 'bytes', 'Content-Length': chunksize, 'Content-Type': 'video/mp4' });
-        fs.createReadStream(path).pipe(res);
+        fs.createReadStream(directory+"/"+path).pipe(res);
         res.statusCode = 500;
         res.end();
     }
