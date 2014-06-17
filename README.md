@@ -18,6 +18,9 @@ This will in background download the video and next time when you try to watch t
 4. Check all the items to accept the permission to be accepted from certificate.
 
 PS: you can generate a new certificate and use that certificate for same.
+When the certificated expire the youtube starts hanging and goinging into infinite loop , if video is not working please create a new certificate.
+http://www.akadia.com/services/ssh_test_certificate.html
+After following rename the certificates to server.key -> key.pem and server.crt -> key-cert.pem
 
 #### Installing the chromium extension.
 
