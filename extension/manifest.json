@@ -23,7 +23,7 @@
     "options_page": "localyoutubeoptions.html",
     "content_scripts" : [
         {
-        "matches" : ["https://www.youtube.com/*"],
+        "matches" : ["*://www.youtube.com/*"],
         "js" : ["localYoutube.js"],
         "run_at" :"document_start"
         }
