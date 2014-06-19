@@ -1,0 +1,54 @@
+#logo
+{
+  position: relative;
+  top: 25px;
+  width: 73px;
+  height: 48px;
+  margin: 0px auto;
+  background-image: url(localyoutube128.png);
+  background-size: 100%;
+}
+
+header
+{
+  height: 30px;
+  margin-bottom: 30px;
+  border-bottom: 30px solid #e1ddd8;
+  background-image: url(background-main.png);
+}
+
+footer
+{
+  cursor: pointer;
+  padding: 10px 35px;
+  border-top: 1px solid #e1ddd8;
+  background-image: url(background-main.png);
+}
+
+body
+{
+  min-width: 250px;
+  margin: 0px;
+  font-family: Segoe UI, Arial, sans-serif;
+  font-size: 13px;
+  color: #545454;
+  background-color: #f8f6f2;
+  background-image: url(background.png);
+}
+
+footer .icon
+{
+  background-position: -50px -65px;
+}
+
+
+.icon
+{
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-right: 15px;
+  vertical-align: top;
+  background-image: url(popup.png);
+}
+

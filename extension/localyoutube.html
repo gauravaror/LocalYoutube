@@ -2,36 +2,23 @@
 <html>
   <head>
     <title>Local Youtube Setting's page</title>
-    <style>
-      body {
-        min-width: 357px;
-        overflow-x: hidden;
-      }
-
-      img {
-        margin: 5px;
-        border: 2px solid black;
-        vertical-align: middle;
-        width: 75px;
-        height: 75px;
-      }
-    </style>
-
-    <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
-      - Policy documentation[1] for details and explanation.
-      -
-      - [1]: http://developer.chrome.com/extensions/contentSecurityPolicy.html
-     -->
+<link rel="stylesheet" type="text/css" href="skin/popup.css">
 <script type="text/javascript" src="popup.js">
+<script type="text/javascript" src="populate.js">
 </script>
   </head>
   <body>
-    <p>Please vist Options page
-    <button id="options" onclick="">Option</button>
-    </p>
-    <div id="lengthsave"></div>
-    <div id="countsave"></div>
+	<header>
+		<div id="logo"></div>
+	</header>
+	
+	<div id="lengthsave"></div>
+	<br>
+	<div id="countsave"></div>
+	<footer id="options">
+		<div id="optionsfootericon"></div>
+		<p>Options</p>
+	</footer>
   </body>
 </html>
 
