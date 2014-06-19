@@ -2,9 +2,32 @@
 <html>
 <head>
 <title>Configure your local youtube option</title>
+  <link rel="stylesheet" href="jquery-ui/css/smoothness/jquery-ui-1.8.16.custom.css">
+  <script src="jquery-ui/js/jquery-1.7.1.min.js"></script>
+  <script src="jquery-ui/js/jquery-ui-1.8.16.custom.min.js"></script>
+  <script src="options.js"></script>
+
 </head>
 
 <body>
+<table>
+  <tr>
+    <td style="padding-right: 8px">
+      <img src="icons/localyoutube128.png">
+    </td>
+    <td>
+      <h1>Local Youtbe Options</h1>
+    </td>
+  </tr>
+</table>
+
+<div id="tabs">
+<ul>
+<li><a href="#EnabeList">Enable/Disable List</a></li>
+<li><a href="#server">Set Server</a></li>
+</ul>
+
+<div  id="EnabeList">
 <label>
   <input type="checkbox" id="list">
   Download and use LocalYoutube only when Playing playist.
@@ -12,6 +35,15 @@
 <button id="save">Save</button>
 
 <div id="status"></div>
+</div>
+<div id="server">
+<h3> Please enter the server you want to use for streaming:</h3>
+<input type="text" id="serverip"><br>
+<button id="saveserverip">Save</Button>
+<div id="serveripstatus"></div>
+<p>**Support for multiple servers coming soon</p>
+</div>
+</div>
+</script>
 </body>
-<script src="options.js"></script>
 </html>
