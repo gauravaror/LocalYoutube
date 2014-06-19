@@ -53,7 +53,7 @@ var ytdlurl = "https://www.youtube.com/watch?v="+id
         res.writeHead(500);
         res.end();
     }
-}).listen(8001, '127.0.0.1');
+}).listen(8001);
 console.log('Server running at http://127.0.0.1:8001/');
 
 var cleartextStream = https.createServer(options,function (req, res) {
@@ -84,7 +84,7 @@ if (path == "./undefined.mp4") {
         downloadFile(req,path);
         setTimeout(letsexecute(req,res,path,total,end),30);
   }
-}).listen(8000, '127.0.0.1');
+}).listen(8000);
 
 console.log('Server running at https://127.0.0.1:8000/');
 
